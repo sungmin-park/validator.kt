@@ -106,7 +106,6 @@ class TestValidator {
         @OneOfList(arrayOf(OneOf(value = "number", items = "numbers"), OneOf(value = "char", items = "chars")))
         class Form(val number: Int, val numbers: List<Int>, val char: Char, val chars: Array<Char>)
 
-
         val validForm = Form(1, listOf(0, 1, 2), 'a', arrayOf('a', 'b', 'c'))
         assertTrue(validForm.numbers.contains(validForm.number))
         assertTrue(validForm.chars.contains(validForm.char))

@@ -8,10 +8,12 @@ import javax.validation.Payload
 import kotlin.reflect.KClass
 
 
+@Suppress("DEPRECATED_JAVA_ANNOTATION")
 @Target(AnnotationTarget.CLASS)
 @Retention
 @Constraint(validatedBy = arrayOf(OneOfValidator::class))
 @Repeatable
+@java.lang.annotation.Repeatable(OneOfList::class)
 annotation class OneOf(val value: String,
                        val items: String,
                        val message: String = "{com.github.sungminpark.validator.OneOf}",
