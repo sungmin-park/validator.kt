@@ -50,7 +50,6 @@ class OneOfValidator : ConstraintValidator<OneOf, Any> {
         val isValid = targets.firstOrNull { !validate(it, items) } == null
         if (!isValid) {
             context.disableDefaultConstraintViolation()
-            context.defaultConstraintMessageTemplate
             context
                     .buildConstraintViolationWithTemplate(message)
                     .addPropertyNode(this.value)
