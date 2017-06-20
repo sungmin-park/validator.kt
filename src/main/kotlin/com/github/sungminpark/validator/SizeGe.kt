@@ -8,17 +8,17 @@ import kotlin.reflect.KClass
 
 @Target(AnnotationTarget.FIELD)
 @Retention
-@Constraint(validatedBy = arrayOf(SizeLeValidator::class))
-annotation class SizeLe(val value: Int,
-                        val message: String = "{com.github.sungminpark.validator.SizeLe}",
+@Constraint(validatedBy = arrayOf(SizeGeValidator::class))
+annotation class SizeGe(val value: Int,
+                        val message: String = "{com.github.sungminpark.validator.SizeGe}",
                         @Suppress("unused") val groups: Array<KClass<*>> = arrayOf(),
                         @Suppress("unused") val payload: Array<KClass<out Payload>> = arrayOf())
 
-class SizeLeValidator : ConstraintValidator<SizeLe, Any> {
+class SizeGeValidator : ConstraintValidator<SizeGe, Any> {
     private var size: Int = 0
     private lateinit var message: String
 
-    override fun initialize(constraintAnnotation: SizeLe) {
+    override fun initialize(constraintAnnotation: SizeGe) {
         size = constraintAnnotation.value
         message = constraintAnnotation.message
     }
@@ -28,6 +28,6 @@ class SizeLeValidator : ConstraintValidator<SizeLe, Any> {
             return true
         }
 
-        return sizeOf(value) <= size
+        return sizeOf(value) >= size
     }
 }
