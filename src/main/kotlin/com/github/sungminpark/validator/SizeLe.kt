@@ -36,7 +36,7 @@ class SizeLeValidator : ConstraintValidator<SizeLe, Any> {
             is String -> obj.length
             is List<*> -> obj.size
             is Map<*, *> -> obj.size
-            is Array<*> -> obj.sizebb
+            is Array<*> -> obj.size
             else -> throw IllegalArgumentException("Cannot handle type of $obj")
         }
     }
