@@ -14,7 +14,7 @@ annotation class SizeLe(val value: Int,
                         @Suppress("unused") val groups: Array<KClass<*>> = arrayOf(),
                         @Suppress("unused") val payload: Array<KClass<out Payload>> = arrayOf())
 
-class SizeLeValidator : ConstraintValidator<SizeLe, String> {
+class SizeLeValidator : ConstraintValidator<SizeLe, Any> {
     private var size: Int = 0
     private lateinit var message: String
 
@@ -23,15 +23,21 @@ class SizeLeValidator : ConstraintValidator<SizeLe, String> {
         message = constraintAnnotation.message
     }
 
-    override fun isValid(value: String?, context: ConstraintValidatorContext): Boolean {
+    override fun isValid(value: Any?, context: ConstraintValidatorContext): Boolean {
         if (value == null) {
             return true
         }
 
-        if (value.length <= size) {
-            return true
-        }
+        return sizeOf(value) <= size
+    }
 
-        return false
+    private fun sizeOf(obj: Any): Int {
+        return when (obj) {
+            is String -> obj.length
+            is List<*> -> obj.size
+            is Map<*, *> -> obj.size
+            is Array<*> -> obj.sizebb
+            else -> throw IllegalArgumentException("Cannot handle type of $obj")
+        }
     }
 }
