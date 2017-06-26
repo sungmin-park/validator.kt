@@ -30,6 +30,7 @@ dependencies {
     compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
     compile 'javax.validation:validation-api:1.1.0.Final'
     compile 'commons-beanutils:commons-beanutils:1.9.3'
+    compile 'org.springframework:spring-webmvc:4.3.8.RELEASE'
 
     testCompile 'org.hibernate:hibernate-validator:5.4.1.Final'
     testCompile 'org.glassfish:javax.el:3.0.0'
